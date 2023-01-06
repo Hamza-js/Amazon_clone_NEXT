@@ -1,35 +1,37 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// const initialState = {
-//   origin: null,
-//   destination: null,
-//   travelTimeInformation: null,
-// };
+const initialState = {
+  items: [],
+};
 
-// export const navSlice = createSlice({
-//   name: "nav",
-//   initialState,
-//   reducers: {
-//     setOrigin: (state, action) => {
-//       state.origin = action.payload;
-//     },
-//     setDestination: (state, action) => {
-//       state.destination = action.payload;
-//     },
-//     setTravelTimeInformation: (state, action) => {
-//       state.travelTimeInformation = action.payload;
-//     },
-//   },
-// });
+export const basketSlice = createSlice({
+  name: "basket",
+  initialState,
+  reducers: {
+    addToBasket: (state, action) => {
+      state.items = [...state.items, action.payload];
+    },
+    removeFromBasket: (state, action) => {
+      const index = state.items.findIndex(
+        (basketItem) => basketItem.id === action.payload.id
+      );
 
-// // actions
-// export const { setOrigin, setDestination, setTravelTimeInformation } =
-//   navSlice.actions;
+      let newBasket = [...state.items];
 
-// //   reducers
-// export const selectOrigin = (state) => state.nav.origin;
-// export const selectDestination = (state) => state.nav.destination;
-// export const selectTravelTimeInformation = (state) =>
-//   state.nav.travelTimeInformation;
+      if (index >= 0) {
+        newBasket.splice(index, 1);
+      } else {
+        console.warn(`Can't remove item with id: ${action.payload.id}`);
+      }
+      state.items = newBasket;
+    },
+  },
+});
 
-// export default navSlice.reducer;
+// actions
+export const { addToBasket, removeFromBasket } = basketSlice.actions;
+
+//   reducers
+export const selectItem = (state) => state.basket.items;
+
+export default basketSlice.reducer;
