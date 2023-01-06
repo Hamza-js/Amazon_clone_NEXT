@@ -32,7 +32,6 @@ function CheckoutProduct({
   };
 
   const removeItemFromBasket = () => {
-    console.log(id);
     dispatch(removeFromBasket({ id }));
   };
 
