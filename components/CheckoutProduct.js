@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import { StarIcon } from "@heroicons/react/24/solid";
-import Currency from "react-currency-formatter";
+// import Currency from "react-currency-formatter";
 import { useDispatch } from "react-redux";
 import { addToBasket, removeFromBasket } from "../slices/basketSlice";
 
@@ -54,7 +54,7 @@ function CheckoutProduct({
             ))}
         </div>
         <p className="text-xs mt-2 mb-2 line-clamp-3">{description}</p>
-        <Currency quantity={price} currency="EUR" />
+        {/* <Currency quantity={price} currency="EUR" /> */}
 
         {hasPrime && (
           <div className="flex items-center space-x-2">
